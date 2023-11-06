@@ -5,12 +5,44 @@ class Chancekort {
         player.location = 1;
     }
     public void Femfrem(Player player){
-        if(player.location<=19){
-            player.location = player.location + 5;
+        int felter = 0;
+
+        var v = new java.util.Scanner(System.in);
+        System.out.println("Du har trukket chancekortet 'fem felter frem!'. indtast et tal fra 1-5 i terminalen");
+        felter = v.nextInt();
+        v.close();
+        if(felter>5){
+            felter = 5;
+        }
+        if(player.location + felter <=24){
+            player.location = player.location + felter;
         }else{
-            player.location = player.location + 5 - 24;
+            player.location = player.location + felter - 24;
         }
     }
+    public void fremellerom(Player player){
+        int choice = 0;
+        System.out.println("Tryk 1 for et rykke et felt frem eller tryk 2 for at trække endnu et chancekort");
+        var v = new java.util.Scanner(System.in);
+        choice = v.nextInt();
+        v.close();
+        if(choice==1){
+            if(player.location + 1 <=24){
+                player.location = player.location + felter;
+            }
+            else{
+                player.location = player.location + 1 - 24;
+            }
+        }
+        else{
+            //simulatelanding på chancekort felt
+        }
+    }
+    public void fremtilstrand(Player player){
+        player.location = 24;
+    }
     
+    
+
 }
 
