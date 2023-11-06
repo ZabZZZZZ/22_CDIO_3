@@ -4,6 +4,7 @@ class Felt {
     private int price;
     private String Color;
     private int owned = 5;
+    boolean match = false;
 
     public Felt(int n, String d, int e, String c) {
         this.fieldNumber = n;
@@ -11,7 +12,19 @@ class Felt {
         this.price = e;
         this.Color = c;
     }
-
+    public void colormatch(Felt board[]){
+        for(int i = 0;i<board.length;i++){
+            if(board[i].owned == 5){
+                continue;
+            }
+            for(int t = 0;t<board.length;t++){
+                if(board[i].Color.equals(board[t].Color)&&!(board[i].equals(board[t]))&&board[i].owned == board[t].owned){
+                    board[i].match = true;
+                    board[t].match = true;
+                }
+            }
+        }
+    }
     //Getters
     public int getFieldNumber() {
         return this.fieldNumber;
@@ -23,14 +36,23 @@ class Felt {
     public String getFieldDescription() {
         return this.fieldDescription;
     }
+    public void colormatch(){
+        
+    }
 
     //Methods
     public void useEffect(Player player) {
-        if (this.Effect < 0) {
-            player.withdraw(this.Effect);
+        if (this.owned == 5) {
+            player.withdraw(this.price);
+            this.owned = player.number;
         }
-        else {
-            player.deposit(this.Effect);
+        else{
+            for(int i = 0;i<4;i++){
+                if(app.players[i].number == this.owned){
+                    players[i].deposit(this.price);
+                    player.withdraw(this.price);
+                }
+            }
         }
     }
 
@@ -48,6 +70,7 @@ class Felt {
     public void landOnField(Player player) {
         useEffect(player);
         showFieldInfo();
+        colormatch(Feltliste[]);
     }
 
     //A method to get the amount to be added or subtracted from the players account
