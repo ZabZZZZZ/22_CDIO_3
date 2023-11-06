@@ -1,17 +1,23 @@
-class FeltListe {
+class Felt {
     private int fieldNumber;
     private String fieldDescription;
-    private int Effect;
+    private int price;
+    private String Color;
+    private int owned = 5;
 
-    public FeltListe(int n, String d, int e) {
+    public Felt(int n, String d, int e, String c) {
         this.fieldNumber = n;
         this.fieldDescription = d;
-        this.Effect = e;
+        this.price = e;
+        this.Color = c;
     }
 
     //Getters
     public int getFieldNumber() {
         return this.fieldNumber;
+    }
+    public String getColor(){
+        return this.Color;
     }
 
     public String getFieldDescription() {
@@ -31,6 +37,13 @@ class FeltListe {
     public void showFieldInfo() {
         System.out.println(getFieldDescription());
     }
+    /*
+    public void changeloc(Player player){
+        player.location = this.FieldNumber;
+    }
+    public void own(Player player){
+        this.owned = player.number;
+    }*/
 
     public void landOnField(Player player) {
         useEffect(player);
