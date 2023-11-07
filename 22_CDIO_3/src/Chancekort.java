@@ -14,10 +14,10 @@ class Chancekort {
         if(felter>5){
             felter = 5;
         }
-        if(player.location + felter <=24){
+        if(player.location + felter <=23){
             player.location = player.location + felter;
         }else{
-            player.location = player.location + felter - 24;
+            player.location = player.location + felter - 23;
         }
     }
     public void fremellerom(Player player){
@@ -31,7 +31,7 @@ class Chancekort {
                 player.location = player.location + felter;
             }
             else{
-                player.location = player.location + 1 - 24;
+                player.location = player.location + 1 - 23;
             }
         }
         else{
@@ -39,7 +39,7 @@ class Chancekort {
         }
     }
     public void fremtilstrand(Player player){
-        player.location = 24;
+        player.location = 23;
     }
     
     

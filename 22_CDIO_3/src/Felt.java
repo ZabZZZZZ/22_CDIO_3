@@ -3,7 +3,7 @@ class Felt {
     private String fieldDescription;
     private int price;
     private String Color;
-    private int owned = 5;
+    private int owned = -1;
     boolean match = false;
 
     public Felt(int n, String d, int e, String c) {
@@ -14,7 +14,7 @@ class Felt {
     }
     public void colormatch(Felt board[]){
         for(int i = 0;i<board.length;i++){
-            if(board[i].owned == 5){
+            if(board[i].owned == -1){
                 continue;
             }
             for(int t = 0;t<board.length;t++){
