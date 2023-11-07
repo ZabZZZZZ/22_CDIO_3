@@ -4,12 +4,14 @@ class Player {
     private int age;
     private int currentField;
     private Account account;
+    private boolean hasCard;
 
     //Constructor for figure and balance
     public Player (String figure, int balance) {
         this.figure = figure;
         this.account = new Account(balance);
         this.currentField = 0;
+        this.hasCard = false;
     }
 
     //Constructor for age
@@ -32,6 +34,10 @@ class Player {
 
     public int getCurrentField() {
         return this.currentField;
+    }
+
+    public boolean getHasCard() {
+        return this.hasCard;
     }
 
     //Setter
