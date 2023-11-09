@@ -1,21 +1,23 @@
 class Player {
-
-    private String name;
+    
+    private String figure;
     private Account account;
     int location = 25;
     int number;
+    boolean harfigurkort = false;
+    boolean fængselskort = false;
 
-    public Player (String name) {
-        this.name = name;
+    public Player (String figure) {
+        this.figure = figure;
         this.account = new Account(1000);
     }
 
     public String getName() {
-        return this.name;
+        return this.figure;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String figure) {
+        this.figure = figure;
     }
 
     public int getPoints() {
