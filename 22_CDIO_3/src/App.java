@@ -11,8 +11,8 @@ class App {
         var die2 = 0;
 
         //Create and initialize players
-        Player player1 = new Player(Namechecker.checkName(1, s));
-        Player player2 = new Player(Namechecker.checkName(2, s));
+        
+        Player[] players = new Player[2];
 
         //Checking if name is same
         Namechecker.isNameSame(player1, player2);

@@ -1,17 +1,21 @@
 class Player {
 
     private String figure;
+    private int playerNumber;
     private int age;
     private int currentField;
     private Account account;
     private boolean hasJailCard;
+    private boolean hasFigureCard;
 
     //Constructor for figure and balance
-    public Player (String figure, int balance) {
+    public Player (String figure, int playerNumber, int balance) {
         this.figure = figure;
+        this.playerNumber = playerNumber;
         this.account = new Account(balance);
         this.currentField = 0;
         this.hasJailCard = false;
+        this.hasFigureCard = false;
     }
 
     //Constructor for age
@@ -22,6 +26,10 @@ class Player {
     //Getters
     public String getFigure() {
         return this.figure;
+    }
+
+    public int getPlayerNumber() {
+        return this.playerNumber;
     }
 
     public int getAge() {
@@ -36,8 +44,12 @@ class Player {
         return this.currentField;
     }
 
-    public boolean getHasCard() {
+    public boolean getHasJailCard() {
         return this.hasJailCard;
+    }
+
+    public boolean getHasFigureCard() {
+        return this.hasFigureCard;
     }
 
     //Setters
@@ -53,6 +65,9 @@ class Player {
         this.hasJailCard = bool;
     }
 
+    public void setHasFigureCard(boolean bool) {
+        this.hasFigureCard = bool;
+    }
     public void withdraw(int amount) {
         account.withdraw(amount);
     }
