@@ -6,7 +6,7 @@ class Felt {
     private int price;
     private String Color;
     private int owned = -1;
-    boolean match = false;
+    private boolean match = false;
 
     public Felt(int n, String d, int e, String c) {
         this.fieldNumber = n;
@@ -44,13 +44,10 @@ class Felt {
     public String getFieldDescription() {
         return this.fieldDescription;
     }
-    public void colormatch(){
-        
-    }
 
     //Methods
-    public void useEffect(Player player) {
-        if (this.owned == 5) {
+    public void buyField(Player player) {
+        if (this.owned == -1) {
             player.withdraw(this.price);
             this.owned = player.number;
         }
@@ -75,14 +72,14 @@ class Felt {
         this.owned = player.number;
     }*/
     public void figurkort(Player player, Felt[] board, Scanner scanner){
-        if(player.harfigurkort){
-            if(player.figure.equals("bil")){
+        if(player.gethasfigurecard()){
+            if(player.getFigure().equals("bil")){
             System.out.println("Nu skal du bruge dit chancekort og drøne hen til dit ønskede felt");
-            }else if(player.figure.equals("skib")){
+            }else if(player.getFigure().equals("skib")){
             System.out.println("Nu skal du bruge dit chancekort og sejle hen til dit ønskede felt");
-            }else if(player.figure.equals("kat")){
+            }else if(player.getFigure().equals("kat")){
             System.out.println("Nu skal du bruge dit chancekort og liste hen til dit ønskede felt");
-            }else if(player.figure.equals("hund")){
+            }else if(player.getFigure().equals("hund")){
             System.out.println("Nu skal du bruge dit chancekort og hoppe hen til dit ønskede felt");
             }
             // Print available fields
@@ -102,28 +99,31 @@ class Felt {
             // Check if the chosen field is available
             if (board[destination].owned == -1) {
                 // Field is available, player can buy it
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("You drove to field " + destination + " and bought it.");
             } else {
                 // Field is owned by another player, player needs to buy from them
                 int seller = board[destination].owned;
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 players[seller - 1].withdraw(board[destination].price);
                 player.deposit(board[destination].price);
                 System.out.println("You drove to field " + destination + " and bought it from Player " + seller + ".");
             }
-            player.harfigurkort = false;
+            player.setHarFigurKort(false);
         }
+    }
+    public void setOwned(int playernum){
+        this.owned = playernum;
     }
 
     public void landOnField(Player player, Scanner scanner, Felt[] board) {
-        if(player.harfigurkort){
+        if(player.gethasfigurecard()){
             figurkort(player, board, scanner);
             return;
         }
-        useEffect(player);
+        buyField(player);
         showFieldInfo();
         colormatch(board);
     }
@@ -168,4 +168,7 @@ class Felt {
             return 0;
         }
     }
+
+    //chancekort effekter
+
 }

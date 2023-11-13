@@ -4,7 +4,7 @@ class Chancekort {
     
 
     public void Fremtilstart(Player player){
-        player.location = 1;
+        player.setPosition(1);
         player.deposit(2);
     }
     public void Femfrem(Player player, Scanner scanner){
@@ -14,10 +14,10 @@ class Chancekort {
         if(felter>5){
             felter = 5;
         }
-        if(player.location + felter <=23){
-            player.location = player.location + felter;
+        if(player.getCurrentField() + felter <=23){
+            player.setPosition(player.getCurrentField()+felter);
         }else{
-            player.location = player.location + felter - 23;
+            player.setPosition(player.getCurrentField()+felter-23);
         }
     }
     public void fremellerom(Player player, Scanner scanner){
@@ -25,7 +25,7 @@ class Chancekort {
         System.out.println("Tryk 1 for et rykke et felt frem eller tryk 2 for at trække endnu et chancekort");
         choice = scanner.nextInt();
         if(choice==1){
-                player.location = player.location + 1;
+                player.setPosition(player.getCurrentField()+1);
             }
         
         else{
@@ -33,13 +33,13 @@ class Chancekort {
         }
     }
     public void fremtilstrand(Player player){
-        player.location = 23;
+        player.setPosition(23);
     }
     public void Kør(Player player, Scanner scanner, Felt[] board) {
         System.out.println("You drew the chance card: 'Next turn, you have to drive to any available field and buy it.'");
     
         // Bruger har nu et kort
-        player.harfigurkort = true;
+        player.setHarFigurKort(true);
         System.out.println("Næste runde skal du vælge et felt at køre over til.");
         }
         public void BlåEllerLilla(Player player, Felt[] board, Scanner scanner) {
@@ -60,17 +60,17 @@ class Chancekort {
             } while (destination < 1 || destination > 23 || !(board[destination].getColor().equals("blå") || board[destination].getColor().equals("lilla")));
         
             // tjek om feltet er ledigt
-            if (board[destination].owned == -1) {
-                // felt er ledigt
-                player.location = destination;
-                board[destination].owned = player.number;
+            if (board[destination].getOwned()==-1) {
+                // feltet er ledigt
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("Du valgte " + destination + " og fik feltet gratis");
                 board[destination].colormatch(board); // Tjek om vi har et colormatch nu
             } else {
-                // felt er ejet
-                int owner = board[destination].owned;
-                player.location = destination;
-                int rent = board[destination].price;
+                // feltet er ejet
+                int owner = board[destination].getOwned();
+                player.setPosition(destination);
+                int rent = board[destination].getPrice();
                 player.withdraw(rent); // withdraw for at betale husleje
                 players[owner - 1].deposit(rent);
                 System.out.println("Du valgte " + destination + " ejet af " + owner + " og betalte husleje: " + rent + "m.");
@@ -86,7 +86,6 @@ class Chancekort {
                     System.out.println("Felt " + i + ": " + board[i].getFieldDescription());
                 }
             }
-        
             int destination;
             do {
                 System.out.println("Indtast feltnummeret du skal over til, Husk at feltet skal være på listen");
@@ -94,17 +93,17 @@ class Chancekort {
             } while (destination < 1 || destination > 23 || !(board[destination].getColor().equals("blå") || board[destination].getColor().equals("lilla")));
         
             // tjek om feltet er ledigt
-            if (board[destination].owned == -1) {
+            if (board[destination].getOwned()==-1) {
                 // feltet er ledigt
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("Du valgte " + destination + " og fik feltet gratis");
                 board[destination].colormatch(board); // Tjek om vi har et colormatch nu
             } else {
                 // feltet er ejet
-                int owner = board[destination].owned;
-                player.location = destination;
-                int rent = board[destination].price;
+                int owner = board[destination].getOwned();
+                player.setPosition(destination);
+                int rent = board[destination].getPrice();
                 player.withdraw(rent); // withdraw for at betale husleje
                 players[owner - 1].deposit(rent);
                 System.out.println("Du valgte " + destination + " ejet af " + owner + " og betalte husleje: " + rent + "m.");
@@ -128,16 +127,16 @@ class Chancekort {
             } while (destination < 1 || destination > 23 || !(board[destination].getColor().equals("lyseblå") || board[destination].getColor().equals("rød")));
         
             // tjek om feltet er ledigt
-            if (board[destination].owned == -1) {
+            if (board[destination].getOwned()==-1) {
                 // feltet er ledigt
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("Du valgte " + destination + " og fik feltet gratis");
                 board[destination].colormatch(board); // Tjek om vi har et colormatch nu
             } else {
                 // feltet er ejet
                 int owner = board[destination].getOwned();
-                player.location = destination;
+                player.setPosition(destination);
                 int rent = board[destination].getPrice();
                 player.withdraw(rent); // withdraw for at betale husleje
                 players[owner - 1].deposit(rent);
@@ -162,17 +161,17 @@ class Chancekort {
             } while (destination < 1 || destination > 23 || !(board[destination].getColor().equals("brun") || board[destination].getColor().equals("gul")));
         
             // tjek om feltet er ledigt
-            if (board[destination].owned == -1) {
+            if (board[destination].getOwned()==-1) {
                 // feltet er ledigt
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("Du valgte " + destination + " og fik feltet gratis");
                 board[destination].colormatch(board); // Tjek om vi har et colormatch nu
             } else {
                 // feltet er ejet
-                int owner = board[destination].owned;
-                player.location = destination;
-                int rent = board[destination].price;
+                int owner = board[destination].getOwned();
+                player.setPosition(destination);
+                int rent = board[destination].getPrice();
                 player.withdraw(rent); // withdraw for at betale husleje
                 players[owner - 1].deposit(rent);
                 System.out.println("Du valgte " + destination + " ejet af " + owner + " og betalte husleje: " + rent + "m.");
@@ -196,17 +195,17 @@ class Chancekort {
             } while (destination < 1 || destination > 23 || !(board[destination].getColor().equals("rød")));
         
             // tjek om feltet er ledigt
-            if (board[destination].owned == -1) {
+            if (board[destination].getOwned()==-1) {
                 // feltet er ledigt
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("Du valgte " + destination + " og fik feltet gratis");
                 board[destination].colormatch(board); // Tjek om vi har et colormatch nu
             } else {
                 // feltet er ejet
-                int owner = board[destination].owned;
-                player.location = destination;
-                int rent = board[destination].price;
+                int owner = board[destination].getOwned();
+                player.setPosition(destination);
+                int rent = board[destination].getPrice();
                 player.withdraw(rent); // withdraw for at betale husleje
                 players[owner - 1].deposit(rent);
                 System.out.println("Du valgte " + destination + " ejet af " + owner + " og betalte husleje: " + rent + "m.");
@@ -230,24 +229,24 @@ class Chancekort {
             } while (destination < 1 || destination > 23 || !(board[destination].getColor().equals("rød")));
         
             // tjek om feltet er ledigt
-            if (board[destination].owned == -1) {
+            if (board[destination].getOwned()==-1) {
                 // feltet er ledigt
-                player.location = destination;
-                board[destination].owned = player.number;
+                player.setPosition(destination);
+                board[destination].setOwned(player.getNumber());
                 System.out.println("Du valgte " + destination + " og fik feltet gratis");
                 board[destination].colormatch(board); // Tjek om vi har et colormatch nu
             } else {
                 // feltet er ejet
-                int owner = board[destination].owned;
-                player.location = destination;
-                int rent = board[destination].price;
+                int owner = board[destination].getOwned();
+                player.setPosition(destination);
+                int rent = board[destination].getPrice();
                 player.withdraw(rent); // withdraw for at betale husleje
                 players[owner - 1].deposit(rent);
                 System.out.println("Du valgte " + destination + " ejet af " + owner + " og betalte husleje: " + rent + "m.");
             }
         }
         public void fremtilpark(Player player){
-            player.location = 10;
+            player.setPosition(10);
         }
         /*
         public void fængselskort(Player player){
