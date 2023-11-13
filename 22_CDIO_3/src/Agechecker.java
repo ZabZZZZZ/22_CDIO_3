@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
 class Agechecker {
-    public static int getAge(playerName);
+    public static int getAge(String playerName) {
     int age = 0;
     boolean validAge = false;
+
+    Scanner scanner = new Scanner(System.in);
 
     while (!validAge) {
         try {
@@ -17,12 +19,14 @@ class Agechecker {
                 validAge = true;
             }
 
-        } catch (numberExeption n) {
+        } catch (NumberFormatException e) {
             System.out.println("Dette er en ugyldig alder. Indtast igen.");
         }
     }
-    return age;
-
     scanner.close();
 
+    return age;
+
+    
+    }
 }
