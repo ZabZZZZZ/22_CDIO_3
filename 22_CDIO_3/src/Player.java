@@ -8,19 +8,29 @@ class Player {
     private boolean hasJailCard;
     private boolean hasFigureCard;
 
-    //Constructor for figure and balance
-    public Player (String figure, int playerNumber, int balance) {
-        this.figure = figure;
-        this.playerNumber = playerNumber;
-        this.account = new Account(balance);
+    //Constructor
+    public Player(int amountOfPlayers) {
+        this.figure = "";
+        this.playerNumber = 0;
+        this.age = 0;
+
+        switch (amountOfPlayers) {
+            case 2:
+            this.account = new Account(20);
+            break;
+
+            case 3:
+            this.account = new Account(18);
+            break;
+
+            case 4:
+            this.account = new Account(16);
+            break;
+        }
+
         this.currentField = 0;
         this.hasJailCard = false;
         this.hasFigureCard = false;
-    }
-
-    //Constructor for age
-    public Player(int age) {
-        this.age = age;
     }
 
     //Getters
@@ -55,6 +65,14 @@ class Player {
     //Setters
     public void setFigure(String figure) {
         this.figure = figure;
+    }
+
+    public void setPlayerNumber(int playerNum) {
+        this.playerNumber = playerNum;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public void setPosition(int n) {
