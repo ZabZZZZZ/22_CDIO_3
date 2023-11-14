@@ -1,5 +1,5 @@
 class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Introduktion.intro();
 
         //Variables
@@ -11,8 +11,11 @@ class App {
         var die2 = 0;
 
         var playerWithLowestAge = 0;
+        var playerWhosTurnItIs = 0;
 
-        //User chooses how many players
+        var gameBoard = new Board();
+
+        //User chooses how many playeirs
         System.out.println("Vaelg mellem 2 og 4 spillere: ");
         var pAmount = Integer.parseInt(s.nextLine());
 
@@ -45,12 +48,38 @@ class App {
             playerWithLowestAge = i;
         }
 
+        pAmount--;
+        playerWhosTurnItIs = playerWithLowestAge;
         playerWithLowestAge++;
 
-        System.out.println("Spiller " + playerWithLowestAge + " begynder");
+        //Game begins
+        System.out.println("Spiller " + playerWithLowestAge + ", " + players[playerWhosTurnItIs].getFigure() + " begynder");
 
         while (true) {
+            die1 = Dice.rollDice();
+            die2 = Dice.rollDice();
             
+            System.out.println(players[playerWhosTurnItIs].getFigure() + " slaar " + die1 + " og " + die2 + ", hvilket giver " + (die1 + die2));
+
+            players[playerWhosTurnItIs].move(die1 + die2);
+
+            System.out.print(players[playerWhosTurnItIs].getFigure() + " lander paa ");
+            gameBoard.giveTurn(players, players[playerWhosTurnItIs]);
+
+            players[playerWhosTurnItIs].getStatus();
+
+            System.out.println("Tryk Enter for at fortsaette");
+
+            temp = s.nextLine();
+
+            if (players[playerWhosTurnItIs].getPoints() <= 0) //Current player is broke
+            break;
+
+            //Next player's turn
+            if (playerWhosTurnItIs == pAmount)
+            playerWhosTurnItIs = 0;
+            else
+            playerWhosTurnItIs++;
         }
     }
 }

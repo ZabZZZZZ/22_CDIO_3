@@ -6,6 +6,7 @@ class Player {
     private int currentField;
     private Account account;
     private boolean hasJailCard;
+    private boolean isJailed;
     private boolean hasFigureCard;
 
     //Constructor
@@ -30,6 +31,7 @@ class Player {
 
         this.currentField = 0;
         this.hasJailCard = false;
+        this.isJailed = false;
         this.hasFigureCard = false;
     }
 
@@ -62,6 +64,14 @@ class Player {
         return this.hasFigureCard;
     }
 
+    public boolean getIsJailed() {
+        return this.isJailed;
+    }
+
+    public void getStatus() {
+        System.out.println(System.lineSeparator() + "Spiller " + this.playerNumber + ", " + this.figure + ", har " + this.getPoints() + "M, og staar paa felt nummer " + (this.currentField + 1));
+    }
+
     //Setters
     public void setFigure(String figure) {
         this.figure = figure;
@@ -77,6 +87,27 @@ class Player {
 
     public void setPosition(int n) {
         this.currentField = n;
+    }
+
+    public void move(int n) {
+        this.currentField += n;
+
+        if (this.currentField > 23) { //Player has passed start
+            this.currentField -= 23;
+            if (this.currentField != 0) {
+                this.deposit(2);
+                System.out.println("Du har passeret start, saa du modtager 2M");
+            }
+        }
+    }
+
+    public void setJail() {
+        this.currentField = 6;
+        this.isJailed = true;
+    }
+
+    public void unJail() {
+        this.isJailed = false;
     }
 
     public void setHasJailCard(boolean bool) {
