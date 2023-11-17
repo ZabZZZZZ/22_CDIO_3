@@ -30,7 +30,7 @@ class Board {
         board[23] = new Felt(23,"Strandpromenaden: Pris: 5m", 5, "blaa");
     }
 
-    public void giveTurn(Player[] players, Player player) {
+    public void giveTurn(Player[] players, Player player, Felt[] board, java.util.Scanner s) {
         if (player.getCurrentField() != 3 && player.getCurrentField() != 9 && player.getCurrentField() != 15 && player.getCurrentField() != 21) {
             switch (player.getCurrentField()) {
                 case 0:
@@ -59,6 +59,7 @@ class Board {
         }
         else {
             board[player.getCurrentField()].showFieldInfo();
+            ChancekortCaller.chooseRandomCard(player, board, s);
         }
     }
 }

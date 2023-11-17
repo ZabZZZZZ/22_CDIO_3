@@ -1,9 +1,0 @@
-IOOuterActive praesenterer: Monopoly Junior 
-Velkommen til dette spil!
-
-I dette spil vil du deltage i en duel mod en anden spiller.
-Hver spiller kaster to terninger og lander paa forskellige felter med numrene fra 2 til 12.
-Hvert felt har en positiv eller negativ effekt paa din pengebeholdning.
-Hver spiller begynder med 1000 points.
-Maalet er at naa 3000 points for at vinde spillet.
-Lad spillet begynde!

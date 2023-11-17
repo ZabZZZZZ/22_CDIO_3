@@ -1,32 +1,18 @@
-import java.io.IOException;
-
 class Introduktion {
-    public static void intro() throws IOException {
-        var fileName = "introduction.txt";
-        var introFile = new java.io.File(fileName);
-
-        try {
-            var s = new java.util.Scanner(introFile);
-
-            while (s.hasNextLine()) {
-                var nextLine = s.nextLine();
-                System.out.println(nextLine);
-            }
-
-            s.close();
-        }
-        catch (IOException e) {
-            System.out.println("Der gik noget galt! " + e.getMessage());
-        }
+    public static void intro() {
         
 
-        // System.out.println("IOOuterActive praesenterer: Monopoly Junior");
-        // System.out.println("Velkommen til dette spil!" + System.lineSeparator());
-        // System.out.println("I dette spil vil du deltage i en duel mod en anden spiller.");
-        // System.out.println("Hver spiller kaster to terninger og lander paa forskellige felter med numrene fra 2 til 12.");
-        // System.out.println("Hvert felt har en positiv eller negativ effekt paa din pengebeholdning.");
-        // System.out.println("Hver spiller begynder med 1000 points");
-        // System.out.println("Maalet er at naa 3000 points for at vinde spillet.");
-        // System.out.println(System.lineSeparator() + "Lad spillet begynde!" + System.lineSeparator());
+        System.out.println("IOOuterActive praesenterer: Monopoly Junior");
+        System.out.println("Velkommen til dette spil!" + System.lineSeparator());
+        System.out.println("I dette spil vil 2-4 spillere spille Monopoly Junior mod hinanden.");
+        System.out.println("Hver spiller kaster to terninger og lander paa et felt der enten er en ejendom, chancekort, faengsel eller start." + System.lineSeparator());
+        System.out.println("1. Hvis du lander paa en ejendom, skal du koebe den.");
+        System.out.println("2. Hvis du lander paa et chancekort, tager du et chancekort og der sker noget.");
+        System.out.println("3. Hvis du lander paa faengsel, skal du til faengslet, og du skal betale 1M for at komme ud." + System.lineSeparator());
+        System.out.println("Alle spillere starter med:" + System.lineSeparator());
+        System.out.println("i) 20M hvis der er 2 spillere");
+        System.out.println("ii) 18M hvis der er 3 spillere");
+        System.out.println("iii) 16M hvis der er 4 spillere");
+        System.out.println(System.lineSeparator() + "Lad spillet begynde!" + System.lineSeparator());
     }
 }
