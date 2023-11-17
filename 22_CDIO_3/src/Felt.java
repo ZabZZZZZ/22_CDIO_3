@@ -87,7 +87,7 @@ class Felt {
     
     //Player has a figurecard
     public void figurkort(Player player, Felt[] board, Scanner scanner){
-        if(player.gethasfigurecard()){
+        if(player.getHasFigureCard()){
             if(player.getFigure().equals("bil")){
             System.out.println("Nu skal du bruge dit chancekort og drøne hen til dit ønskede felt");
             }else if(player.getFigure().equals("skib")){
@@ -97,6 +97,7 @@ class Felt {
             }else if(player.getFigure().equals("hund")){
             System.out.println("Nu skal du bruge dit chancekort og hoppe hen til dit ønskede felt");
             }
+
             // Print available fields
             System.out.println("Felter at vælge mellem:");
             for (int i = 1; i < board.length; i++) {
@@ -115,13 +116,13 @@ class Felt {
             if (board[destination].ownedBy == -1) {
                 // Field is available, player can buy it
                 player.setPosition(destination);
-                board[destination].setOwned(player.getNumber());
+                board[destination].setOwned(player.getPlayerNumber());
                 System.out.println("You drove to field " + destination + " and bought it.");
             } else {
                 // Field is owned by another player, player needs to buy from them
                 int seller = board[destination].ownedBy;
                 player.setPosition(destination);
-                board[destination].setOwned(player.getNumber());
+                board[destination].setOwned(player.getPlayerNumber());
                 players[seller - 1].withdraw(board[destination].price);
                 player.deposit(board[destination].price);
                 System.out.println("You drove to field " + destination + " and bought it from Player " + seller + ".");

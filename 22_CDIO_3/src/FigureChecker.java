@@ -4,6 +4,7 @@ class FigureChecker {
     public static void setFigures(Player player, int n, Figure fig, Scanner s) {
         var figures = fig;
         var isValidNum = false;
+        var nextLine = "";
         var choice = 0;
         
         System.out.println("Spiller " + (n + 1) + ", vaelg en figur: " + System.lineSeparator() + "Tast: " + System.lineSeparator());
@@ -17,7 +18,13 @@ class FigureChecker {
         System.out.println("");
 
         while (!isValidNum) {
-            choice = Integer.parseInt(s.nextLine());
+            try {
+                choice = Integer.parseInt(s.nextLine());
+            }
+            catch (Exception e) {
+                System.out.println("Du skal skrive et tal for at vaelge en figur!");
+                continue;
+            }
 
             if (choice < 1 || choice > 4) {
                 System.out.println(choice + " er ikke et gyldigt valg");

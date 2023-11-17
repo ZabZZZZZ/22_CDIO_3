@@ -37,7 +37,7 @@ class App {
         }
 
         //Showing the information of players to the user
-        System.out.println(System.lineSeparator() + "Du har valgt: ");
+        System.out.println(System.lineSeparator() + "Du har valgt: " + System.lineSeparator());
         for (var p : players) {
             System.out.println("For spiller " + p.getPlayerNumber() + ": " + p.getFigure() + ", " + p.getPoints() + "M, " + p.getAge() + " aar gammel.");
         }
@@ -53,7 +53,10 @@ class App {
         playerWithLowestAge++;
 
         //Game begins
-        System.out.println("Spiller " + playerWithLowestAge + ", " + players[playerWhosTurnItIs].getFigure() + " begynder");
+        System.out.println(System.lineSeparator() + "Spiller " + playerWithLowestAge + ", " + players[playerWhosTurnItIs].getFigure() + " begynder" + System.lineSeparator());
+        System.out.println("Er i klar? Tryk Enter for at begynde.");
+
+        temp = s.nextLine();
 
         while (true) {
             die1 = Dice.rollDice();
@@ -64,16 +67,16 @@ class App {
             players[playerWhosTurnItIs].move(die1 + die2);
 
             System.out.print(players[playerWhosTurnItIs].getFigure() + " lander paa ");
-            gameBoard.giveTurn(players, players[playerWhosTurnItIs]);
+            gameBoard.giveTurn(players, players[playerWhosTurnItIs], gameBoard.getBoard(), s);
+            
+            if (players[playerWhosTurnItIs].getPoints() <= 0) //Current player is broke
+            break;
 
             players[playerWhosTurnItIs].getStatus();
 
             System.out.println("Tryk Enter for at fortsaette");
 
             temp = s.nextLine();
-
-            if (players[playerWhosTurnItIs].getPoints() <= 0) //Current player is broke
-            break;
 
             //Next player's turn
             if (playerWhosTurnItIs == pAmount)
