@@ -63,18 +63,23 @@ class ChancekortCaller {
             break;
 
             case 14:
+            c.figurKort(players, player, board, scanner, "Bil");
             break;
 
             case 15:
+            c.figurKort(players, player, board, scanner, "Skib");
             break;
 
             case 16:
+            c.figurKort(players, player, board, scanner, "Hund");
             break;
 
             case 17:
+            c.figurKort(players, player, board, scanner, "Kat");
             break;
 
             case 18:
+            c.faengselskort(player);
             break;
         }
     }

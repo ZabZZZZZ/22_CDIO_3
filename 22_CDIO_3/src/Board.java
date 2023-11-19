@@ -4,30 +4,30 @@ class Board {
     public Board() {
         board = new Felt[24];
 
-        board[0] = new Felt(0, "Start: Du modtager 2m", -2, "start" );
-        board[1] = new Felt(1, "Burgerbaren: Pris: 1m", 1, "brun");
-        board[2] = new Felt(2, "Pizzariaet: Pris: 1m", 1, "brun");
-        board[3] = new Felt(3,"Chance! Traek et kort", 0, "chance");
-        board[4] = new Felt(4,"Slikbutikken: Pris: 1m", 1, "lyseblaa");
-        board[5] = new Felt(5,"Iskiosken: Pris: 1m", 1, "lyseblaa");
-        board[6] = new Felt(6,"Besoeger en ven i faengsel", 0, "besoeg");
-        board[7] = new Felt(7,"Museet: Pris: 2m", 2, "pink");
-        board[8] = new Felt(8,"Biblioteket: Pris: 2m", 2, "pink");
-        board[9] = new Felt(9,"Chance! Traek et kort", 0, "chance");
-        board[10] = new Felt(10,"Skaterparken: Pris: 2m", 2, "orange");
-        board[11] = new Felt(11,"Swimmingpoolen: Pris: 2m", 2, "orange");
-        board[12] = new Felt(12,"Gratis parkering, bare slap af", 0, "parkering");
-        board[13] = new Felt(13,"Spillehallen: Pris: 3m", 3, "roed");
-        board[14] = new Felt(14,"Biografen: Pris: 3m", 3, "roed");
-        board[15] = new Felt(15,"Chance! Traek et kort", 0, "chance");
-        board[16] = new Felt(16,"Legetoejsbutikken: Pris: 3m", 3, "gul");
-        board[17] = new Felt(17,"Dyrehandlen: Pris: 3m", 3, "gul");
-        board[18] = new Felt(18,"Gaa i faengsel: Du har koert for hurtigt", 0, "faengsel");
-        board[19] = new Felt(19,"Bowlinghallen: Pris: 4m", 4, "groen");
-        board[20] = new Felt(20,"Zoologisk have: Pris: 4m", 4, "groen");
-        board[21] = new Felt(21,"Chance! Traek et kort", 0, "chance");
-        board[22] = new Felt(22,"Vandlandet: Pris: 5m", 5, "moerkeblaa");
-        board[23] = new Felt(23,"Strandpromenaden: Pris: 5m", 5, "moerkeblaa");
+        board[0] = new Felt(0, "Start: Du modtager 2M", -2, null);
+        board[1] = new Felt(1, "Burgerbaren: Pris: 1M", 1, "brun");
+        board[2] = new Felt(2, "Pizzahuset: Pris: 1M", 1, "brun");
+        board[3] = new Felt(3,"Chance og traekker et kort" + System.lineSeparator(), 0, null);
+        board[4] = new Felt(4,"Slikbutikken: Pris: 1M", 1, "lyseblaa");
+        board[5] = new Felt(5,"Iskiosken: Pris: 1M", 1, "lyseblaa");
+        board[6] = new Felt(6,"Besoeger en ven i faengsel", 0, null);
+        board[7] = new Felt(7,"Museet: Pris: 2M", 2, "pink");
+        board[8] = new Felt(8,"Biblioteket: Pris: 2M", 2, "pink");
+        board[9] = new Felt(9,"Chance og traekker et kort" + System.lineSeparator(), 0, null);
+        board[10] = new Felt(10,"Skaterparken: Pris: 2M", 2, "orange");
+        board[11] = new Felt(11,"Swimmingpoolen: Pris: 2M", 2, "orange");
+        board[12] = new Felt(12,"Gratis parkering, bare slap af", 0, null);
+        board[13] = new Felt(13,"Spillehallen: Pris: 3M", 3, "roed");
+        board[14] = new Felt(14,"Biografen: Pris: 3M", 3, "roed");
+        board[15] = new Felt(15,"Chance og traekker et kort" + System.lineSeparator(), 0, null);
+        board[16] = new Felt(16,"Legetoejsbutikken: Pris: 3M", 3, "gul");
+        board[17] = new Felt(17,"Dyrehandlen: Pris: 3M", 3, "gul");
+        board[18] = new Felt(18,"Gaa i faengsel: Du har koert for hurtigt", 0, null);
+        board[19] = new Felt(19,"Bowlinghallen: Pris: 4M", 4, "groen");
+        board[20] = new Felt(20,"Zoologisk have: Pris: 4M", 4, "groen");
+        board[21] = new Felt(21,"Chance og traekker et kort" + System.lineSeparator(), 0, null);
+        board[22] = new Felt(22,"Vandlandet: Pris: 5M", 5, "moerkeblaa");
+        board[23] = new Felt(23,"Strandpromenaden: Pris: 5M", 5, "moerkeblaa");
     }
 
     public Felt[] getBoard() {

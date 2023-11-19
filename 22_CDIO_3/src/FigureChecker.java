@@ -4,7 +4,6 @@ class FigureChecker {
     public static void setFigures(Player player, int n, Figure fig, Scanner s) {
         var figures = fig;
         var isValidNum = false;
-        var nextLine = "";
         var choice = 0;
         
         System.out.println("Spiller " + (n + 1) + ", vaelg en figur: " + System.lineSeparator() + "Tast: " + System.lineSeparator());

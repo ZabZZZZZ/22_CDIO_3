@@ -12,6 +12,7 @@ class App {
 
         var playerWithLowestAge = 0;
         var playerWhosTurnItIs = 0;
+        var currentTurnNumber = 1;
 
         var gameBoard = new Board();
 
@@ -59,10 +60,32 @@ class App {
         temp = s.nextLine();
 
         while (true) {
+            System.out.println("----------------------------" + System.lineSeparator() + "Tur nummer " + currentTurnNumber + ".");
+
+            //Player has a figure card
+            if (players[playerWhosTurnItIs].getHasFigureCard()) {
+                players[playerWhosTurnItIs].figurkort(players, gameBoard.getBoard(), s);
+
+                players[playerWhosTurnItIs].getStatus();
+
+                //Next player's turn
+                if (playerWhosTurnItIs == pAmount)
+                playerWhosTurnItIs = 0;
+                else
+                playerWhosTurnItIs++;
+                continue;
+            }
+            
+            //If player is in jail, this will run
+            players[playerWhosTurnItIs].getOutOfJail();
+            
+            //Get players status before turn
+            players[playerWhosTurnItIs].getStatus();
+
             die1 = Dice.rollDice();
             die2 = Dice.rollDice();
             
-            System.out.println(players[playerWhosTurnItIs].getFigure() + " slaar " + die1 + " og " + die2 + ", hvilket giver " + (die1 + die2));
+            System.out.println(System.lineSeparator() + players[playerWhosTurnItIs].getFigure() + " slaar " + die1 + " og " + die2 + ", hvilket giver " + (die1 + die2) + System.lineSeparator());
 
             players[playerWhosTurnItIs].move(die1 + die2);
 
@@ -72,11 +95,14 @@ class App {
             if (players[playerWhosTurnItIs].getPoints() <= 0) //Current player is broke
             break;
 
+            //Get players status after turn
             players[playerWhosTurnItIs].getStatus();
 
             System.out.println("Tryk Enter for at fortsaette");
 
             temp = s.nextLine();
+
+            currentTurnNumber++;
 
             //Next player's turn
             if (playerWhosTurnItIs == pAmount)
@@ -84,44 +110,20 @@ class App {
             else
             playerWhosTurnItIs++;
         }
+
+        s.close();
+
+        //Checking how many properties each player has
+        var amountOfProperties = new int[players.length];
+
+        for (var i = 0; i < gameBoard.getBoard().length; i++) {
+            for (var j = 0; j < players.length; j++) {
+                if (gameBoard.getBoard()[i].getOwnedBy() == players[j].getPlayerNumber()) {
+                    amountOfProperties[j]++;
+                }
+            }
+        }
+
+        WinCheck.checkWinner(players, players[playerWhosTurnItIs], amountOfProperties);
     }
 }
-//         while(true) {
-//             //Player 1 rolls
-//             die1 = Dice.rollDice();
-//             die2 = Dice.rollDice();
-            
-//             System.out.println(player1.getName() + " slaar " + die1 + " og " + die2 + ", hvilket giver " + (die1 + die2));
-
-//             //Points are checked and added or subtracted
-//             SumChecker.checkSum(die1, die2, player1, s);
-
-//             System.out.println(player1.getName() + " har nu " + player1.getPoints() + " points.");
-//             System.out.println("Tryk Enter for at fortsaette" + System.lineSeparator());
-
-//             temp = s.nextLine();
-            
-//             //Player 2 rolls
-//             die1 = Dice.rollDice();
-//             die2 = Dice.rollDice();
-
-//             System.out.println(player2.getName() + " slaar " + die1 + " og " + die2 + ", hvilket giver " + (die1 + die2));
-
-//             //Points are checked and added or subtracted
-//             SumChecker.checkSum(die1, die2, player2, s);
-
-//             System.out.println(player2.getName() + " har nu " + player2.getPoints() + " points.");
-//             System.out.println("Tryk Enter for at fortsaette" + System.lineSeparator());
-
-//             temp = s.nextLine();
-
-//             //Check if someone won
-//             if (player1.getPoints() >= 3000 || player2.getPoints() >= 3000)
-//             break;
-//         }
-//         s.close();
-
-//         //Checking who won
-//         WinCheck.checkWinner(player1, player2);
-//     }
-// }
