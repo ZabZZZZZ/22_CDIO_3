@@ -139,7 +139,7 @@ class Chancekort {
         // tjek om feltet er ledigt
         if (board[actualChoice].getOwnedBy() == -1) {
             // feltet er ledigt
-            player.setPosition(choice);
+            player.setPosition(actualChoice);
             board[actualChoice].setOwnedBy(player.getPlayerNumber());
 
             System.out.println("Du valgte " + choice + " og fik feltet gratis");
@@ -148,7 +148,7 @@ class Chancekort {
         } else {
             // feltet er ejet
             int owner = board[actualChoice].getOwnedBy();
-            player.setPosition(choice);
+            player.setPosition(actualChoice);
 
             int rent = board[actualChoice].getPrice();
 
