@@ -16,21 +16,20 @@ class Player {
         this.figure = "";
         this.playerNumber = 0;
         this.age = 0;
-        this.account = new Account(5);
 
-        // switch (amountOfPlayers) {
-        //     case 2:
-        //     this.account = new Account(20);
-        //     break;
+        switch (amountOfPlayers) {
+            case 2:
+            this.account = new Account(20);
+            break;
 
-        //     case 3:
-        //     this.account = new Account(18);
-        //     break;
+            case 3:
+            this.account = new Account(18);
+            break;
 
-        //     case 4:
-        //     this.account = new Account(16);
-        //     break;
-        // }
+            case 4:
+            this.account = new Account(16);
+            break;
+        }
 
         this.currentField = 0;
         this.hasJailCard = false;

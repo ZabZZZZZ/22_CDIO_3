@@ -54,7 +54,22 @@ class Board {
                 player.setJail();
             break;
 
-            case 3, 9, 15, 21: //Chancekort
+            case 3: //Chancekort
+                this.board[player.getCurrentField()].showFieldInfo();
+                ChancekortCaller.chooseRandomCard(players, player, board, s);
+            break;
+
+            case 9: //Chancekort
+                this.board[player.getCurrentField()].showFieldInfo();
+                ChancekortCaller.chooseRandomCard(players, player, board, s);
+            break;
+
+            case 15: //Chancekort
+                this.board[player.getCurrentField()].showFieldInfo();
+                ChancekortCaller.chooseRandomCard(players, player, board, s);
+            break;
+            
+            case 21: //Chancekort
                 this.board[player.getCurrentField()].showFieldInfo();
                 ChancekortCaller.chooseRandomCard(players, player, board, s);
             break;
