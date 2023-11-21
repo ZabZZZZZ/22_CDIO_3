@@ -63,8 +63,12 @@ class Felt {
 
             for(int t = 0; t < board.length; t++){
                 if(board[i].getColor() != null && board[t].getColor() != null && board[i].getColor().equals(board[t].getColor()) && !(board[i].equals(board[t])) && board[i].getOwnedBy() == board[t].getOwnedBy()){
-                    board[i].doublePrice();
-                    board[t].doublePrice();
+                    if (board[i].getMatch() == false) {
+                        board[i].doublePrice();
+                        board[t].doublePrice();
+                        board[i].setMatch(true);
+                        board[t].setMatch(true);
+                    }
                 }
             }
         }
@@ -79,9 +83,9 @@ class Felt {
             System.out.println(System.lineSeparator() + player.getFigure() + " koeber ejendommen for " + this.getPrice() + "M");
         }
         else if (this.ownedBy == player.getPlayerNumber()) { //Player owns it
-            System.out.println("Du landede paa din egen ejendom, saa du slapper bare af.");
+            System.out.println(System.lineSeparator() + "Du landede paa din egen ejendom, saa du slapper bare af.");
         }
-        else{ //Find out who owns it and pay rent
+        else { //Find out who owns it and pay rent
             for(int i = 0; i < players.length; i++){
                 if(players[i].getPlayerNumber() == this.ownedBy){
                     players[i].deposit(this.price);
