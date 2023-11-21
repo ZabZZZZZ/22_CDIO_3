@@ -52,8 +52,11 @@ class Chancekort {
 
         System.out.println("Tryk 1 for et rykke et felt frem eller tryk 2 for at traekke endnu et chancekort");
 
-        System.out.println("Det naeste felt er " + board[player.getCurrentField() + 1].getFieldNumber() + ": " + board[player.getCurrentField() + 1].getFieldDescription());
-        
+        if (board[player.getCurrentField() + 1].getOwnedBy() == player.getPlayerNumber())
+        System.out.println("Det naeste felt er " + board[player.getCurrentField() + 1].getFieldNumber() + ": " + board[player.getCurrentField() + 1].getFieldDescription() + " ejet af dig selv.");
+        else
+        System.out.println("Det naeste felt er " + board[player.getCurrentField() + 1].getFieldNumber() + ": " + board[player.getCurrentField() + 1].getFieldDescription() + " ejet af " + board[player.getCurrentField()].getOwnedBy() + ".");
+
         while (true) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
@@ -211,9 +214,6 @@ class Chancekort {
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
                         else
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
-                        
-                        felter[j] = i;
-                        j++;
                     }
                 }
             }
@@ -229,9 +229,6 @@ class Chancekort {
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
                         else
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
-                        
-                        felter[j] = i;
-                        j++;
                     }
                 }
             }

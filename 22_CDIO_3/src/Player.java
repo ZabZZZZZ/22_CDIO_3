@@ -102,7 +102,7 @@ class Player {
         this.currentField += n;
 
         if (this.currentField > 23) { //Player has passed start
-            this.currentField -= 23;
+            this.currentField -= 24;
             if (this.currentField != 0) {
                 this.deposit(2);
                 System.out.println("Du har passeret start, saa du modtager 2M" + System.lineSeparator());
