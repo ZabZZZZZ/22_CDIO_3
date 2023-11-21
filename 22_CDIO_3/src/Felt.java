@@ -51,7 +51,7 @@ class Felt {
 
     public void doublePrice() {
         this.price *= 2;
-        this.fieldDescription += ". Ejeren har begge ejendomme af samme farve, saa prisen er fordoblet.";
+        this.fieldDescription += ", ejeren har begge ejendomme af samme farve, saa prisen er fordoblet";
     }
 
     //Methods
