@@ -119,9 +119,6 @@ class Chancekort {
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
                         else
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
-                        
-                        felter[j] = i;
-                        j++;
                     }
                 }
 
@@ -139,9 +136,6 @@ class Chancekort {
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
                         else
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
-                        
-                        felter[j] = i;
-                        j++;
                     }
                 }
 
