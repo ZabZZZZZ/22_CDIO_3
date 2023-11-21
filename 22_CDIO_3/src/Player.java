@@ -234,12 +234,12 @@ class Player {
             }
 
             // Print available fields
-            System.out.println("Ledige felter at vaelge mellem:");
+            System.out.println("Ledige felter at vaelge mellem:" + System.lineSeparator());
 
             for (int i = 0; i < felter.length; i++) {
                 for (var j = 1; j < board.length; j++) {
                     if (board[j].getFieldNumber() == felter[i]) {
-                        System.out.println("Felt " + felter[i] + ": " + board[j].getFieldDescription());
+                        System.out.println("Felt " + (felter[i] + 1) + ": " + board[j].getFieldDescription());
                         break;
                     }
                 }
@@ -254,11 +254,16 @@ class Player {
                     choice = Integer.parseInt(scanner.nextLine());
                 }
                 catch (Exception e) { //Player input a non integer
-                    System.out.println("Du skal taste en af tallene: ");
+                    System.out.println("Du skal taste en af tallene: " + System.lineSeparator());
     
-                    for (var i : felter) {
-                        System.out.println((i + 1));
-                    }
+                    for (int i = 0; i < felter.length; i++) {
+                        for (var j = 1; j < board.length; j++) {
+                            if (board[j].getFieldNumber() == felter[i]) {
+                                System.out.println("Felt " + (felter[i] + 1) + ": " + board[j].getFieldDescription());
+                                break;
+                            }
+                        }
+                    }   
                 }
 
                 for (var i = 0; i < felter.length; i++) {
@@ -271,10 +276,14 @@ class Player {
                 if (isIn && choice >= 2 && choice <= 24) //Player input a valid integer
                 break;
                 else { //Player input an integer that wasnt part of the choices
-                    System.out.println("Du skal taste en af tallene: ");
-    
-                    for (var i : felter) {
-                        System.out.println((i + 1));
+                    System.out.println("Du skal taste en af tallene: " + System.lineSeparator());
+                    for (int i = 0; i < felter.length; i++) {
+                        for (var j = 1; j < board.length; j++) {
+                            if (board[j].getFieldNumber() == felter[i]) {
+                                System.out.println("Felt " + (felter[i] + 1) + ": " + board[j].getFieldDescription());
+                                break;
+                            }
+                        }
                     }
                 }
             }
