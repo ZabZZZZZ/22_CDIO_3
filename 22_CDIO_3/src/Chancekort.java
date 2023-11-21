@@ -54,8 +54,10 @@ class Chancekort {
 
         if (board[player.getCurrentField() + 1].getOwnedBy() == player.getPlayerNumber())
         System.out.println("Det naeste felt er " + board[player.getCurrentField() + 1].getFieldNumber() + ": " + board[player.getCurrentField() + 1].getFieldDescription() + " ejet af dig selv.");
-        else
+        else if (board[player.getCurrentField() + 1].getOwnedBy() != -1)
         System.out.println("Det naeste felt er " + board[player.getCurrentField() + 1].getFieldNumber() + ": " + board[player.getCurrentField() + 1].getFieldDescription() + " ejet af " + board[player.getCurrentField()].getOwnedBy() + ".");
+        else
+        System.out.println("Det naeste felt er " + board[player.getCurrentField() + 1].getFieldNumber() + ": " + board[player.getCurrentField() + 1].getFieldDescription() + ".");
 
         while (true) {
             try {
