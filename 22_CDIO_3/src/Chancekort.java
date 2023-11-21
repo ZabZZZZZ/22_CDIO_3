@@ -210,6 +210,8 @@ class Chancekort {
                         System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
                     }
                 }
+
+                continue;
             }
 
             if (choice == (felter[0] + 1) || choice == (felter[1] + 1) || choice == (felter[2] + 1) || choice == (felter[3] + 1))
