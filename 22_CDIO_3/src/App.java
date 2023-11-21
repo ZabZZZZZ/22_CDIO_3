@@ -10,6 +10,7 @@ class App {
         var die1 = 0;
         var die2 = 0;
 
+        var pAmount = 0;
         var playerWithLowestAge = 0;
         var playerWhosTurnItIs = 0;
         var currentTurnNumber = 1;
@@ -18,7 +19,23 @@ class App {
 
         //User chooses how many playeirs
         System.out.println("Vaelg mellem 2 og 4 spillere: ");
-        var pAmount = Integer.parseInt(s.nextLine());
+        while (true) {
+            try {
+                pAmount = Integer.parseInt(s.nextLine());
+            }
+            catch (Exception e) {
+                System.out.println("Du skal skrive et tal for at vaelge en figur!");
+                continue;
+            }
+
+            if (pAmount < 2 || pAmount > 4) {
+                System.out.println(pAmount + " er ikke et gyldigt valg");
+                continue;
+            }
+
+            break;
+        }
+
 
         //Player array created with amount of players as length
         Player[] players = new Player[pAmount];

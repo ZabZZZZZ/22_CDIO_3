@@ -5,7 +5,7 @@ class ChancekortCaller {
         var rand = new Random();
         var c = new Chancekort();
 
-        switch (rand.nextInt(18)) {
+        switch (rand.nextInt(19)) {
             case 0:
             c.fremTilStart(player);
             break;

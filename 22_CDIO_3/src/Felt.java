@@ -1,7 +1,7 @@
 class Felt {
     private final int fieldNumber;
-    private final String fieldDescription;
-    private final int price;
+    private String fieldDescription;
+    private int price;
     private final String color;
     private int ownedBy;
     private boolean match;
@@ -36,6 +36,10 @@ class Felt {
         return this.ownedBy;
     }
 
+    public boolean getMatch() {
+        return this.match;
+    }
+
     //Setters
     public void setMatch(boolean match) {
         this.match = match;
@@ -45,8 +49,13 @@ class Felt {
         this.ownedBy = playernum;
     }
 
+    public void doublePrice() {
+        this.price *= 2;
+        this.fieldDescription += ". Ejeren har begge ejendomme af samme farve, saa prisen er fordoblet.";
+    }
+
     //Methods
-    public void colormatch(Felt[] board){
+    public static void colormatch(Felt[] board){
         for(int i = 0; i < board.length; i++){
             if(board[i].ownedBy == -1){
                 continue;
@@ -54,8 +63,8 @@ class Felt {
 
             for(int t = 0; t < board.length; t++){
                 if(board[i].getColor() != null && board[t].getColor() != null && board[i].getColor().equals(board[t].getColor()) && !(board[i].equals(board[t])) && board[i].getOwnedBy() == board[t].getOwnedBy()){
-                    board[i].setMatch(true);
-                    board[t].setMatch(true);
+                    board[i].doublePrice();
+                    board[t].doublePrice();
                 }
             }
         }
@@ -69,6 +78,9 @@ class Felt {
             this.ownedBy = player.getPlayerNumber();
             System.out.println(System.lineSeparator() + player.getFigure() + " koeber ejendommen for " + this.getPrice() + "M");
         }
+        else if (this.ownedBy == player.getPlayerNumber()) { //Player owns it
+            System.out.println("Du landede paa din egen ejendom, saa du slapper bare af.");
+        }
         else{ //Find out who owns it and pay rent
             for(int i = 0; i < players.length; i++){
                 if(players[i].getPlayerNumber() == this.ownedBy){
@@ -81,7 +93,7 @@ class Felt {
         }
     }
 
-    //Buy field
+    //Buy already owned field
     public void buyOwnedField(Player[] players, Player player) {
         for(int i = 0; i < players.length; i++){
             if(players[i].getPlayerNumber() == this.ownedBy){

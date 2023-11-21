@@ -1,5 +1,5 @@
 class Board {
-    Felt[] board;
+    private Felt[] board;
 
     public Board() {
         board = new Felt[24];
@@ -35,6 +35,10 @@ class Board {
     }
 
     public void giveTurn(Player[] players, Player player, Felt[] board, java.util.Scanner s) {
+        //Checking for colormatching
+        Felt.colormatch(board);
+
+        //Checking for kind of field
         switch (player.getCurrentField()) {
             case 0: //Start
                 this.board[0].showFieldInfo();
@@ -68,7 +72,7 @@ class Board {
                 this.board[player.getCurrentField()].showFieldInfo();
                 ChancekortCaller.chooseRandomCard(players, player, board, s);
             break;
-            
+
             case 21: //Chancekort
                 this.board[player.getCurrentField()].showFieldInfo();
                 ChancekortCaller.chooseRandomCard(players, player, board, s);

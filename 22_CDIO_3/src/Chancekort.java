@@ -17,13 +17,9 @@ class Chancekort {
         else if (felter <= 1) {
             felter = 1;
         }
-        
-        if(player.getCurrentField() + felter <= 23){
-            player.setPosition(player.getCurrentField() + felter);
-            System.out.println("Du har rykket " + felter + " felter frem.");
-        }else{
-            player.setPosition(player.getCurrentField() + felter - 23);
-        }
+
+        player.move(felter);
+        System.out.println("Du har rykket " + felter + " felter frem.");
     }
 
     public void spistForMeget(Player player) {
@@ -89,7 +85,7 @@ class Chancekort {
         var j = 0;
         var choice = 0;
 
-        System.out.println("Du trak kortet: " + farve + ", hvilket betyder at du skal vaelge et felt den farve." + System.lineSeparator());
+        System.out.println("Du trak kortet: " + farve + ", hvilket betyder at du skal vaelge et felt af den farve." + System.lineSeparator());
 
         // Print available fields
         System.out.println("Alle " + farve + " felter:" + System.lineSeparator());
@@ -114,8 +110,16 @@ class Chancekort {
             catch (Exception e) {
                 System.out.println("Du skal taste en af tallene: ");
 
-                for (var i : felter) {
-                    System.out.println((i + 1));
+                for (int i = 1; i < board.length; i++) {
+                    if ((board[i].getColor() != null && board[i].getColor().equals(farve))) {
+                        if (board[i].getOwnedBy() == -1)
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
+                        else
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
+                        
+                        felter[j] = i;
+                        j++;
+                    }
                 }
 
                 System.out.println("");
@@ -126,8 +130,16 @@ class Chancekort {
             else {
                 System.out.println("Du skal taste en af tallene: ");
 
-                for (var i : felter) {
-                    System.out.println((i + 1));
+                for (int i = 1; i < board.length; i++) {
+                    if ((board[i].getColor() != null && board[i].getColor().equals(farve))) {
+                        if (board[i].getOwnedBy() == -1)
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
+                        else
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
+                        
+                        felter[j] = i;
+                        j++;
+                    }
                 }
 
                 System.out.println("");
@@ -146,15 +158,20 @@ class Chancekort {
 
             board[actualChoice].colormatch(board); // Tjek om vi har et colormatch nu
         } else {
-            // feltet er ejet
-            int owner = board[actualChoice].getOwnedBy();
-            player.setPosition(actualChoice);
+            // feltet er ejet af en selv
+            if (board[actualChoice].getOwnedBy() == player.getPlayerNumber()) {
+                System.out.println("Du valgte " + choice + ", men du ejer det allerede, saa der sker ikke noget.");
+            }
+            else { //Feltet er ejet af en anden
+                int owner = board[actualChoice].getOwnedBy();
+                player.setPosition(actualChoice);
 
-            int rent = board[actualChoice].getPrice();
+                int rent = board[actualChoice].getPrice();
 
-            player.withdraw(rent); // withdraw for at betale husleje
-            players[owner - 1].deposit(rent);
-            System.out.println("Du valgte " + choice + " ejet af " + players[owner - 1].getFigure() + " og betalte husleje: " + rent + "m.");
+                player.withdraw(rent); // withdraw for at betale husleje
+                players[owner - 1].deposit(rent);
+                System.out.println("Du valgte " + choice + " ejet af " + players[owner - 1].getFigure() + " og betalte husleje: " + rent + "M.");
+            }
         }
     }
         
@@ -188,8 +205,16 @@ class Chancekort {
             catch (Exception e) {
                 System.out.println("Du skal taste en af tallene: ");
 
-                for (var i : felter) {
-                    System.out.println((i + 1));
+                for (int i = 1; i < board.length; i++) {
+                    if ((board[i].getColor() != null && (board[i].getColor().equals(farve1) || board[i].getColor().equals(farve2)))) {
+                        if (board[i].getOwnedBy() == -1)
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
+                        else
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
+                        
+                        felter[j] = i;
+                        j++;
+                    }
                 }
             }
 
@@ -198,8 +223,16 @@ class Chancekort {
             else {
                 System.out.println("Du skal taste en af tallene: ");
 
-                for (var i : felter) {
-                    System.out.println((i + 1));
+                for (int i = 1; i < board.length; i++) {
+                    if ((board[i].getColor() != null && (board[i].getColor().equals(farve1) || board[i].getColor().equals(farve2)))) {
+                        if (board[i].getOwnedBy() == -1)
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription());
+                        else
+                        System.out.println("Felt " + (i + 1) + ": " + board[i].getFieldDescription() + ", ejet af " + players[board[i].getOwnedBy() - 1].getFigure());
+                        
+                        felter[j] = i;
+                        j++;
+                    }
                 }
             }
         }
@@ -214,19 +247,24 @@ class Chancekort {
             player.setPosition(actualChoice);
             board[actualChoice].setOwnedBy(player.getPlayerNumber());
 
-            System.out.println("Du valgte " + choice + " og fik feltet gratis");
+            System.out.println("Du valgte " + choice + ", " + board[actualChoice].getFieldDescription() + ", og fik feltet gratis");
 
             board[actualChoice].colormatch(board); // Tjek om vi har et colormatch nu
         } else {
-            // feltet er ejet
-            int owner = board[actualChoice].getOwnedBy();
-            player.setPosition(actualChoice);
+            // feltet er ejet af en selv
+            if (board[actualChoice].getOwnedBy() == player.getPlayerNumber()) {
+                System.out.println("Du valgte " + choice + ", men du ejer det allerede, saa der sker ikke noget.");
+            }
+            else {
+                int owner = board[actualChoice].getOwnedBy();
+                player.setPosition(actualChoice);
 
-            int rent = board[actualChoice].getPrice();
+                int rent = board[actualChoice].getPrice();
 
-            player.withdraw(rent); // withdraw for at betale husleje
-            players[owner - 1].deposit(rent);
-            System.out.println("Du valgte " + choice + " ejet af " + players[owner - 1].getFigure() + " og betalte husleje: " + rent + "m.");
+                player.withdraw(rent); // withdraw for at betale husleje
+                players[owner - 1].deposit(rent);
+                System.out.println("Du valgte " + choice + " ejet af " + players[owner - 1].getFigure() + " og betalte husleje: " + rent + "M.");
+            }
         }
     }
 
@@ -263,6 +301,15 @@ class Chancekort {
 
     public void figurKort(Player[] players, Player player, Felt[] board, Scanner scanner, String fig) {
         var playerNumber = -1;
+
+        //Is figure the player himself
+        if (fig.equals(player.getFigure())) {
+            players[playerNumber].setHasFigureCard(true);
+            System.out.println("Du har trukket et figurkort! Da figuren er din egen, traekker du et nyt chancekort denne tur." + System.lineSeparator() + "Tryk enter for at fortsaette.");
+            var temp = scanner.nextLine();
+            ChancekortCaller.chooseRandomCard(players, player, board, scanner);
+            return;
+        }
         
         //Does the figure even exist
         for (var i = 0; i < players.length; i++) {

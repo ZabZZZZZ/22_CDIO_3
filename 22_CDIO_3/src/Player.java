@@ -181,7 +181,7 @@ class Player {
                     }
                 }
 
-                for (var i = 0; i < felter.length; i++) {
+                for (var i = 1; i < felter.length; i++) {
                     if (choice == felter[i]) {
                         isIn = true;
                         break;
@@ -245,8 +245,10 @@ class Player {
                 }
             }
 
+            choice = 0;
+
             //Getting a choice from the player
-            while (true) {
+            while (choice < 2 || choice > 24) {
                 var isIn = false;
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
@@ -266,7 +268,7 @@ class Player {
                     }
                 }
 
-                if (isIn) //Player input a valid integer
+                if (isIn && choice >= 2 && choice <= 24) //Player input a valid integer
                 break;
                 else { //Player input an integer that wasnt part of the choices
                     System.out.println("Du skal taste en af tallene: ");
@@ -286,11 +288,11 @@ class Player {
 
     public void getOutOfJail() {
         if (this.getIsJailed()) { //Player is jailed
-            if (this.getHasJailCard()) {
+            if (this.getHasJailCard()) { //Player has get out of prison card
                 System.out.println("Du var faengslet men du brugte dit faengselskort til at slippe ud!");
                 this.unJail();
             }
-            else {
+            else { //Player gets rekt
                 System.out.println("Du var faengslet og skulle betale 1M for at komme ud!");
                 this.withdraw(1);
                 this.unJail();
