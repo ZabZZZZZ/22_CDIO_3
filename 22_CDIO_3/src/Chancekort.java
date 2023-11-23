@@ -299,7 +299,7 @@ class Chancekort {
 
         //Is figure the player himself
         if (fig.equals(player.getFigure())) {
-            players[playerNumber].setHasFigureCard(true);
+            player.setHasFigureCard(true);
             System.out.println("Du har trukket et figurkort! Da figuren er din egen, traekker du et nyt chancekort denne tur." + System.lineSeparator() + "Tryk enter for at fortsaette.");
             var temp = scanner.nextLine();
             ChancekortCaller.chooseRandomCard(players, player, board, scanner);
