@@ -90,6 +90,7 @@ class App {
                 playerWhosTurnItIs = 0;
                 else
                 playerWhosTurnItIs++;
+
                 continue;
             }
             
@@ -106,7 +107,7 @@ class App {
 
             players[playerWhosTurnItIs].move(die1 + die2);
 
-            System.out.print(players[playerWhosTurnItIs].getFigure() + " lander paa ");
+            System.out.print(players[playerWhosTurnItIs].getFigure() + " lander paa felt nummer " + (players[playerWhosTurnItIs].getCurrentField() + 1) + ": ");
             gameBoard.giveTurn(players, players[playerWhosTurnItIs], gameBoard.getBoard(), s);
             
             if (players[playerWhosTurnItIs].getPoints() <= 0) //Current player is broke

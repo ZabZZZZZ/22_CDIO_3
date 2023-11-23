@@ -7,26 +7,118 @@ class Chancekort {
         player.setPosition(0);
         player.deposit(2);
     }
-    public void femFrem(Player player, Scanner scanner){
-        int felter = 0;
-        System.out.println("Du har trukket chancekortet 'fem felter frem!'. indtast et tal fra 1-5");
-        felter = scanner.nextInt();
-        if (felter > 5){
-            felter = 5;
-        }
-        else if (felter <= 1) {
-            felter = 1;
+
+    //Ryk fem felter frem
+    public void femFrem(Player[] players, Player player, Felt[] board, Scanner scanner){
+        int choice = 0;
+        var felter = new int[5];
+        var j = 0;
+        var isIn = false;
+
+        System.out.println("Du har trukket chancekortet 'fem felter frem!'. Du skal indtaste et af de naeste fem felters tal flytte til det felt." + System.lineSeparator() + "De naeste fem felter er:" + System.lineSeparator());
+
+        for (var i = player.getCurrentField() + 1; i < player.getCurrentField() + 6; i++) {
+            var k = i % 23;
+
+            if (k != 0) { //It is not the final field 
+                if (board[k].getOwnedBy() == -1)
+                System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription());
+                else if (board[k].getOwnedBy() == player.getPlayerNumber())
+                System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription() + ", ejet af dig selv");
+                else
+                System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription() + ", ejet af " + players[board[k].getOwnedBy() - 1].getFigure());
+                
+                felter[j] = k;
+                j++;   
+            }
+            else { //It is the final field, so a special case is needed
+                if (board[23].getOwnedBy() == -1)
+                System.out.println("Felt 24, " + board[23].getFieldDescription());
+                else if (board[23].getOwnedBy() == player.getPlayerNumber())
+                System.out.println("Felt 24, " + board[23].getFieldDescription() + ", ejet af dig selv");
+                else
+                System.out.println("Felt 24, " + board[23].getFieldDescription() + ", ejet af " + players[board[23].getOwnedBy() - 1].getFigure());
+
+                felter[j] = 23;
+                j++;
+            }
         }
 
-        player.move(felter);
-        System.out.println("Du har rykket " + felter + " felter frem.");
+        while (!isIn) {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }
+            catch (Exception e) {
+                System.out.println(System.lineSeparator() + "Du skal indtaste et af de naeste fem felters tal. De naeste fem felter er:");
+                
+                for (var i = player.getCurrentField() + 1; i < player.getCurrentField() + 6; i++) {
+                    var k = i % 23;
+
+                    if (k != 0) { //It is not the final field 
+                        if (board[k].getOwnedBy() == -1)
+                        System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription());
+                        else if (board[k].getOwnedBy() == player.getPlayerNumber())
+                        System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription() + ", ejet af dig selv");
+                        else
+                        System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription() + ", ejet af " + players[board[k].getOwnedBy() - 1].getFigure());
+                    }
+                    else { //It is the final field, so a special case is needed
+                        if (board[23].getOwnedBy() == -1)
+                        System.out.println("Felt 24, " + board[23].getFieldDescription());
+                        else if (board[23].getOwnedBy() == player.getPlayerNumber())
+                        System.out.println("Felt 24, " + board[23].getFieldDescription() + ", ejet af dig selv");
+                        else
+                        System.out.println("Felt 24, " + board[23].getFieldDescription() + ", ejet af " + players[board[23].getOwnedBy() - 1].getFigure());
+                    }
+                }
+                continue;
+            }
+
+            for (var i = 0; i < felter.length; i++) {
+                if (choice - 1 == felter[i]) {
+                    isIn = true;
+                    break;
+                }
+            }
+
+            if (!isIn) {
+                System.out.println(System.lineSeparator() + "Du skal indtaste et af de naeste fem felters tal. De naeste fem felter er:");
+                
+                for (var i = player.getCurrentField() + 1; i < player.getCurrentField() + 6; i++) {
+
+                    var k = i % 23;
+
+                    if (k != 0) { //It is not the final field 
+                        if (board[k].getOwnedBy() == -1)
+                        System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription());
+                        else if (board[k].getOwnedBy() == player.getPlayerNumber())
+                        System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription() + ", ejet af dig selv");
+                        else
+                        System.out.println("Felt " + (k + 1) + ", " + board[k].getFieldDescription() + ", ejet af " + players[board[k].getOwnedBy() - 1].getFigure());
+                    }
+                    else { //It is the final field, so a special case is needed
+                        if (board[23].getOwnedBy() == -1)
+                        System.out.println("Felt 24, " + board[23].getFieldDescription());
+                        else if (board[23].getOwnedBy() == player.getPlayerNumber())
+                        System.out.println("Felt 24, " + board[23].getFieldDescription() + ", ejet af dig selv");
+                        else
+                        System.out.println("Felt 24, " + board[23].getFieldDescription() + ", ejet af " + players[board[23].getOwnedBy() - 1].getFigure());
+                    }
+                }
+            }
+        }
+
+        player.setPosition(choice - 1);
+        System.out.println("Du har rykket til felt " + choice + ", " + board[choice - 1].getFieldDescription());
     }
 
+    //Spist for meget
     public void spistForMeget(Player player) {
         System.out.println("Du trak kortet: spist for meget slik. Du skal betale 2M til banken");
         player.withdraw(2);
     }
 
+    //Foedselsdag
     public void foedselsdag(Player[] players, Player player) {
         System.out.println("Du trak kortet: det er din foedselsdag. Alle skal give dig 1M");
 
@@ -41,11 +133,13 @@ class Chancekort {
         player.deposit(players.length - 1);
     }
 
+    //Lavet alle lektier
     public void lavetAlleLektier(Player player) {
         System.out.println("Du trak kortet: du har lavet alle dine lektier. Du modtager 2M");
         player.deposit(2);
     }
 
+    //Ryk en frem eller tag et nyt chancekort
     public void enFremEllerOm(Player[] players, Player player, Felt[] board, Scanner scanner){
         System.out.println("Du trak kortet: ryk en frem eller tag et chancekort mere.");
         int choice = 0;
@@ -81,10 +175,12 @@ class Chancekort {
         }
     }
 
+    //Frem til strand
     public void fremTilStrand(Player player){
         player.setPosition(23);
     }
 
+    //Ryk frem til en farvet ejendom
     public void enRandom(Player[] players, Player player, Felt[] board, String farve, Scanner scanner) {
         var felter = new int[2];
         var j = 0;
@@ -173,7 +269,8 @@ class Chancekort {
             }
         }
     }
-        
+    
+    //Ryk frem til en farvet ejendom, men 2 farver
     public void enEllerAndenRandom(Player[] players, Player player, Felt[] board, String farve1, String farve2, Scanner scanner) {
         var felter = new int[4];
         var j = 0;
@@ -244,7 +341,7 @@ class Chancekort {
 
             System.out.println("Du valgte " + choice + ", " + board[actualChoice].getFieldDescription() + ", og fik feltet gratis");
 
-            board[actualChoice].colormatch(board); // Tjek om vi har et colormatch nu
+            Felt.colormatch(board); // Tjek om vi har et colormatch nu
         } else {
             // feltet er ejet af en selv
             if (board[actualChoice].getOwnedBy() == player.getPlayerNumber()) {
@@ -263,6 +360,7 @@ class Chancekort {
         }
     }
 
+    //Ryk frem til skaterparken
     public void fremTilSkaterpark(Player[] players, Player player, Felt[] board){
         System.out.println("Du trak kortet: ryk frem til skaterparken");
 
@@ -275,7 +373,7 @@ class Chancekort {
 
             System.out.println("Da feltet ikke er ejet af nogen, fik du feltet gratis!");
 
-            board[10].colormatch(board); // Tjek om vi har et colormatch nu
+            Felt.colormatch(board); // Tjek om vi har et colormatch nu
         } else {
             // feltet er ejet
             int owner = board[10].getOwnedBy();
@@ -289,11 +387,13 @@ class Chancekort {
         }
     }
     
+    //Faengselskort
     public void faengselskort(Player player){
         System.out.println("Du har trukket et faengselskort! Du loeslades fra faengslet uden omkostninger, behold det til du faar brug for kortet");
         player.setHasJailCard(true);
     }
 
+    //Figurkort
     public void figurKort(Player[] players, Player player, Felt[] board, Scanner scanner, String fig) {
         var playerNumber = -1;
 

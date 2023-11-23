@@ -5,7 +5,7 @@ class ChancekortCaller {
         var rand = new Random();
         var c = new Chancekort();
 
-        switch (rand.nextInt(19)) {
+        switch (rand.nextInt(20)) {
             case 0:
             c.fremTilStart(player);
             break;
@@ -39,7 +39,7 @@ class ChancekortCaller {
             break;
 
             case 8:
-            c.femFrem(player, scanner);
+            c.femFrem(players, player, board, scanner);
             break;
 
             case 9:
@@ -81,6 +81,9 @@ class ChancekortCaller {
             case 18:
             c.faengselskort(player);
             break;
+
+            case 19:
+            c.enRandom(players, player, board, "lyseblaa", scanner);
         }
     }
 }
