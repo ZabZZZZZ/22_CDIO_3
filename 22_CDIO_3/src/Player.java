@@ -248,7 +248,7 @@ class Player {
             choice = 0;
 
             //Getting a choice from the player
-            while (choice < 2 || choice > 24) {
+            while (true) {
                 var isIn = false;
                 try {
                     choice = Integer.parseInt(scanner.nextLine());

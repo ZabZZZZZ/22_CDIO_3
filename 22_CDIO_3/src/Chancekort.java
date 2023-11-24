@@ -384,7 +384,7 @@ class Chancekort {
 
             player.withdraw(rent); // withdraw for at betale husleje
             players[owner - 1].deposit(rent);
-            System.out.println("Da skaterparken er ejet af " + players[owner].getFigure() + ", skulle du betale " + rent + "M til ejeren.");
+            System.out.println("Da skaterparken er ejet af " + players[owner - 1].getFigure() + ", skulle du betale " + rent + "M til ejeren.");
         }
     }
     
