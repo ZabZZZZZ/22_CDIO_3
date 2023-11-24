@@ -176,7 +176,8 @@ class Chancekort {
     }
 
     //Frem til strand
-    public void fremTilStrand(Player player){
+    public void fremTilStrand(Player player) {
+        System.out.println("Du trak kortet: Frem til strand." + System.lineSeparator() + "Du bliver rykket frem til stranden.");
         player.setPosition(23);
     }
 
