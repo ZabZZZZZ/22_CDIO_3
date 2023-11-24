@@ -267,7 +267,7 @@ class Player {
                 }
 
                 for (var i = 0; i < felter.length; i++) {
-                    if (choice == felter[i]) {
+                    if (choice - 1 == felter[i]) {
                         isIn = true;
                         break;
                     }
