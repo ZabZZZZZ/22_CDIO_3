@@ -292,6 +292,9 @@ class Chancekort {
                 
                 felter[j] = i;
                 j++;
+
+                if (j >= 4)
+                break;
             }
         }
 
@@ -316,7 +319,7 @@ class Chancekort {
                 continue;
             }
 
-            if (choice == (felter[0] + 1) || choice == (felter[1] + 1) || choice == (felter[2] + 1) || choice == (felter[3] + 1))
+            if (choice - 1 == felter[0] || choice - 1 == felter[1] || choice - 1 == felter[2] || choice - 1 == felter[3])
             break;
             else {
                 System.out.println("Du skal taste en af tallene: ");
@@ -348,7 +351,8 @@ class Chancekort {
         } else {
             // feltet er ejet af en selv
             if (board[actualChoice].getOwnedBy() == player.getPlayerNumber()) {
-                System.out.println("Du valgte " + choice + ", men du ejer det allerede, saa der sker ikke noget.");
+                System.out.println("Du valgte " + choice + ", " + board[actualChoice].getFieldDescription() + ", men du ejer det allerede, saa der sker ikke noget.");
+                player.setPosition(actualChoice);
             }
             else {
                 int owner = board[actualChoice].getOwnedBy();
