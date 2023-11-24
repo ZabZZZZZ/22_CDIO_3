@@ -200,6 +200,8 @@ class Chancekort {
                 
                 felter[j] = i;
                 j++;
+                if (j >= 2)
+                break;
             }
         }
 
@@ -210,7 +212,7 @@ class Chancekort {
                 choice = Integer.parseInt(scanner.nextLine());
             }
             catch (Exception e) {
-                System.out.println("Du skal taste en af tallene: ");
+                System.out.println("Du skal taste et af tallene: ");
 
                 for (int i = 1; i < board.length; i++) {
                     if ((board[i].getColor() != null && board[i].getColor().equals(farve))) {
@@ -224,7 +226,7 @@ class Chancekort {
                 System.out.println("");
             }
 
-            if (choice == felter[0] || choice == felter[1])
+            if (choice - 1 == felter[0] || choice - 1 == felter[1])
             break;
             else {
                 System.out.println("Du skal taste en af tallene: ");
@@ -252,7 +254,7 @@ class Chancekort {
 
             System.out.println("Du valgte " + choice + " og fik feltet gratis");
 
-            board[actualChoice].colormatch(board); // Tjek om vi har et colormatch nu
+            Felt.colormatch(board); // Tjek om vi har et colormatch nu
         } else {
             // feltet er ejet af en selv
             if (board[actualChoice].getOwnedBy() == player.getPlayerNumber()) {
